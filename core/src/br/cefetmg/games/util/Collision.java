@@ -18,7 +18,21 @@ public class Collision {
      * @return true se há colisão ou false, do contrário.
      */
     public static final boolean circlesOverlap(Circle c1, Circle c2) {
-        return false;
+        float raioC1 = c1.radius;
+        float raioC2 = c2.radius;
+        
+        float distanciaMinima = raioC1 + raioC2;
+        float dMinimaQuadrado = distanciaMinima*distanciaMinima;
+        
+        float distanciaX = c2.x - c1.x;
+        float distanciaY = c2.y - c1.y;
+        float dAtual = distanciaX*distanciaX + distanciaY*distanciaY;
+        
+        if (dMinimaQuadrado >= dAtual){
+            return true;
+        } else {
+            return false;
+        }      
     }
 
     /**
@@ -44,6 +58,13 @@ public class Collision {
      * @return true se há colisão ou false, do contrário.
      */
     public static final boolean rectsOverlap(Rectangle r1, Rectangle r2) {
+        if ((r1.x <= r2.x) && ((r1.x + r1.width)>= r2.x)){
+            if ((r1.y <= r2.y) && ((r1.y + r1.height)>= r2.y))
+                return true;
+        } else if ((r2.x <= r1.x) && ((r2.x + r2.width)>= r1.x)){
+            if ((r2.y <= r1.y) && ((r2.y + r2.height)>= r1.y))
+                return true;
+        }
         return false;
     }
 
